@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CG Exercise 1_TeilE</title>
+  <style>
+    * {
+      font-size: 20px;
+    }
+  </style>
+  <script type="application/javascript" src="dsliveupdate.js"></script>
+</head>
+
+<body>
+  <h3>Exercise 1_TeilE: Ngoc Huong Phan</h3>
+  <canvas id = "miCanvas" width="300" height="300" style="border: 1px solid black;"></canvas>
+  <script>
+    var c = document.getElementById("miCanvas");
+    var ctx = c.getContext("2d");
+
+    function clearCanvas(){
+        ctx.clearRect(0, 0, c.width, c.height);
+    }
+
+    function change_color(){
+      let red = Math.round(Math.random() * 255);
+      let green = Math.round(Math.random() * 255);
+      let blue = Math.round(Math.random() * 255);
+      let new_color = "rgb(" + red + ", " + green + ", " + blue + ")";
+      return new_color;
+    }
+
+    function switch_direction(direction) {
+      let output = direction;
+      if (direction == "bigger") {
+        output = "smaller";
+      }
+      if (direction == "smaller") {
+        output = "bigger";
+      }
+      return output;
+    }
+
+    function draw(x, y, r, colour, stroke_color, border){
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.lineWidth = border;
+        ctx.strokeStyle = stroke_color;
+        ctx.fillStyle = colour;
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    var radi = 50;
+    var border = 30;
+    let farbe = change_color();
+    let stroke_farbe = change_color();
+    let direction = "bigger";
+
+    let start = null;
+    let change_time = 50;
+
+    function render(time){
+      if (!start) start = time;
+      var dauer = time - start;
+
+      clearCanvas();
+
+      if (dauer > change_time) {
+        if (direction == "bigger") {
+          radi = 50 + (49 * dauer / 1000);
+          border = 20 - (19 * dauer / 1000);
+        }
+
+        if (direction == "smaller") {
+          radi = 99 - (49 * dauer / 1000);
+          border = 1 + (19 * dauer / 1000);
+        }
+
+        change_time += 50;
+      }
+
+      draw(150, 150, radi, farbe, stroke_farbe, border);
+      if (dauer > 1000) { 
+        start += 1000;
+        farbe = change_color();
+        stroke_farbe = change_color();
+        change_time = 50;
+        direction = switch_direction(direction);
+      }
+
+      window.requestAnimationFrame(render);
+    }
+    window.requestAnimationFrame(render);
+
+  </script>
+</body>
+
+</html>

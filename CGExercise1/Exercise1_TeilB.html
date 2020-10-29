@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CG Exercise 1_TeilB</title>
+  <style>
+    * {
+      font-size: 20px;
+    }
+  </style>
+  <script type="application/javascript" src="dsliveupdate.js"></script>
+</head>
+
+<body>
+  <h3>Exercise 1_TeilB: Ngoc Huong Phan</h3>
+    <canvas id = "miCanvas" width="300" height="300" style="border: 1px solid black;"></canvas>
+  <script>
+    var c = document.getElementById("miCanvas");
+    var ctx = c.getContext("2d");
+
+    function clearCanvas(){
+        ctx.clearRect(0, 0, c.width, c.height);
+    }
+
+    function draw(x, y, r, colour, border){
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.lineWidth = border;
+        ctx.fillStyle = colour;
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    clearCanvas();
+    draw(150, 150, 75, "blue", 8);
+
+  </script>
+</body>
+
+</html>

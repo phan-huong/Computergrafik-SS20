@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CG Exercise 1_TeilC</title>
+  <style>
+    * {
+      font-size: 20px;
+    }
+  </style>
+  <script type="application/javascript" src="dsliveupdate.js"></script>
+</head>
+
+<body>
+  <h3>Exercise 1_TeilC: Ngoc Huong Phan</h3>
+    <canvas id = "miCanvas" width="300" height="300" style="border: 1px solid black;"></canvas>
+  <script>
+    var c = document.getElementById("miCanvas");
+    var ctx = c.getContext("2d");
+
+    function clearCanvas(){
+        ctx.clearRect(0, 0, c.width, c.height);
+    }
+
+    function draw(x, y, r, colour, border){
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.lineWidth = border;
+        ctx.fillStyle = colour;
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    let r1 = 50;
+    let border2 = 30;
+
+    function render(time){
+        clearCanvas();
+        ctx.fillStyle = "red";
+        ctx.fillRect(0, 0, c.width, c.height);
+        draw(150, 150, r1, "green", border2);
+        r1++;
+        if (r1 == 80){
+            r1 = 50;
+        }
+        border2--;
+        if (border2 == 0){
+            border2 = 30;
+        }
+        window.requestAnimationFrame(render);
+    }
+    window.requestAnimationFrame(render);
+
+  </script>
+</body>
+
+</html>
