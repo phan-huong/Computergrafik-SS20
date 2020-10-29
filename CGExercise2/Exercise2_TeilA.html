@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>CG Exercise 2 TEIL A </title>
+      <script type="application/javascript" src="dsliveupdate.js"></script>
+  </head>
+
+  <body>
+    <canvas id="miCanvas"></canvas>
+    <script>
+      var canvas = document.getElementById('miCanvas');
+      var gl = canvas.getContext('webgl');
+      canvas.width = 578;
+      canvas.height = 400;
+
+      function clear(){
+        gl.clear(gl.COLOR_BUFFER_BIT);
+      }
+      
+      function render(time){
+        clear();
+        gl.clearColor(Math.random(), Math.random(), Math.random(), 1);
+        requestAnimationFrame(render);
+      }
+      requestAnimationFrame(render);
+    </script>
+  </body>
+
+</html>
